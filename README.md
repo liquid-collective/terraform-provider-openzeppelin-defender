@@ -3,7 +3,7 @@
 <div align="center">
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/liquid-collective/terraform-provider-openzeppelin-defender.svg)](https://pkg.go.dev/github.com/liquid-collective/terraform-provider-openzeppelin-defender)
-[![Go Report Card](https://goreportcard.com/badge/github.com/liquid-collective/terraform-provider-openzeppelin-defender?style=flat-square)](https://goreportcard.com/report/github.com/liquid-collective/terraform-provider-openzeppelin-defender)
+[![Go Report Card](https://goreportcard.com/badge/github.com/liquid-collective/terraform-provider-openzeppelin-defender)](https://goreportcard.com/report/github.com/liquid-collective/terraform-provider-openzeppelin-defender)
 [![Release](https://img.shields.io/github/v/release/liquid-collective/terraform-provider-openzeppelin-defender?logo=terraform&include_prereleases&style=flat-square)](https://github.com/liquid-collective/terraform-provider-openzeppelin-defender/releases)
 [![Codecov](https://img.shields.io/codecov/c/github/liquid-collective/terraform-provider-openzeppelin-defender?logo=codecov&style=flat-square)](https://codecov.io/gh/liquid-collective/terraform-provider-openzeppelin-defender)
 [![License](https://img.shields.io/github/license/liquid-collective/terraform-provider-openzeppelin-defender.svg?logo=fossa&style=flat-square)](https://github.com/liquid-collective/terraform-provider-openzeppelin-defender/blob/master/LICENSE)
