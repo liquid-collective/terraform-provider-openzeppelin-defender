@@ -1,7 +1,5 @@
 # Terraform Provider OpenZeppelin Defender
 
-<div align="center">
-
 [![GoDoc](https://pkg.go.dev/badge/github.com/liquid-collective/terraform-provider-openzeppelin-defender.svg)](https://pkg.go.dev/github.com/liquid-collective/terraform-provider-openzeppelin-defender)
 [![Go Report Card](https://goreportcard.com/badge/github.com/liquid-collective/terraform-provider-openzeppelin-defender)](https://goreportcard.com/report/github.com/liquid-collective/terraform-provider-openzeppelin-defender)
 [![Release](https://img.shields.io/github/v/release/liquid-collective/terraform-provider-openzeppelin-defender?logo=terraform&include_prereleases&style=flat-square)](https://github.com/liquid-collective/terraform-provider-openzeppelin-defender/releases)
