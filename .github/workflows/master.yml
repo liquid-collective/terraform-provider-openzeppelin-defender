@@ -32,6 +32,6 @@ jobs:
       - name: Update codecov report
         uses: codecov/codecov-action@v3
         with:
-          files: .build/ut_cov.out
+          files: .build/coverage/ut_cov.out
           fail_ci_if_error: false
           verbose: true
