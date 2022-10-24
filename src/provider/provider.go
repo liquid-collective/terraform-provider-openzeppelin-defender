@@ -43,14 +43,12 @@ func Provider() *schema.Provider {
 		},
 	}
 
-	provider.ConfigureContextFunc = ConfigureProvider(provider.TerraformVersion)
+	provider.ConfigureContextFunc = ConfigureProvider()
 
 	return provider
 }
 
-// ConfigureProvider will configure the *schema.Provider so that *management.Management
-// client is stored and passed into the subsequent resources as the meta parameter.
-func ConfigureProvider(terraformVersion string) schema.ConfigureContextFunc {
+func ConfigureProvider() schema.ConfigureContextFunc {
 	return func(ctx context.Context, data *schema.ResourceData) (interface{}, diag.Diagnostics) {
 		cfg := &defenderclient.Config{
 			APIURL:       data.Get("api_url").(string),

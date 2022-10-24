@@ -58,3 +58,9 @@ mockgen-install:
 
 mockgen: mockgen-install
 	$(GOPATH)/bin/mockgen -source pkg/defender/client/client.go -destination pkg/defender/client/mock/client.go -package mock Client
+
+generate:
+	$(GOPATH)/bin/tfplugindocs generate --provider-name "terraform-provider-openzeppelin-defender" --rendered-provider-name "OpenZeppelin Defender" --tf-version "v1.3.1"
+
+release:
+	goreleaser release --rm-dist --snapshot --skip-publish  --skip-sign
