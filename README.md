@@ -12,11 +12,11 @@ OpenZeppelin Defender Terraform Provider is a plugin for managing Admin proposal
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - [Official Docs](https://registry.terraform.io/providers/liquid-collective/openzeppelin-defender/latest/docs)
 
-## 🎻 Getting Started
+## Getting Started
 
 ### Requirements
 
@@ -49,47 +49,3 @@ Then, run
 ```sh
 $ terraform init
 ```
-
-## 👋 Contributing
-
-Feedback and contributions to this project are welcome! Before you get started, please review the following:
-
-- [Auth0 Contribution Guidelines](https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md)
-- [Auth0 Contributor Code of Conduct](https://github.com/auth0/open-source-template/blob/master/CODE-OF-CONDUCT.md)
-- [Contribution Guide](CONTRIBUTING.md)
-
-## 🙇 Support & Feedback
-
-### Raise an Issue
-
-If you have found a bug or if you have a feature request, please raise an issue on our
-[issue tracker](https://github.com/auth0/terraform-provider-auth0/issues).
-
-### Vulnerability Reporting
-
-Please do not report security vulnerabilities on the public GitHub issue tracker.
-The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
-
-
----
-
-<div align="center">
-
-<img alt="Auth0 logo and word-mark in black on transparent background" src="https://user-images.githubusercontent.com/28300158/183676042-b9d92893-8fff-408f-9a36-63e77b14be30.png#gh-light-mode-only"  width="20%" height="20%">
-
-<img alt="Auth0 logo and word-mark in white on transparent background" src="https://user-images.githubusercontent.com/28300158/183676141-bea463f9-af82-40ce-b18c-3a1030183d58.png#gh-dark-mode-only"  width="20%" height="20%">
-
-</div>
-
-<br/>
-
-<div align="center">
-
-Auth0 is an easy to implement, adaptable authentication and authorization platform. To learn more checkout
-[Why Auth0?](https://auth0.com/why-auth0)
-
-This project is licensed under the MPL-2.0 license. See the [LICENSE](LICENSE) file for more info or
-[auth0-terraform-provider.pdf](https://www.okta.com/sites/default/files/2022-03/auth0-terraform-provider.pdf) for a full
-report.
-
-</div>
