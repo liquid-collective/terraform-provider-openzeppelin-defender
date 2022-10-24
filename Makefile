@@ -16,7 +16,7 @@ UNIT_COVERAGE_OUT = $(COVERAGE_BUILD_FOLDER)/ut_cov.out
 UNIT_COVERAGE_HTML =$(COVERAGE_BUILD_FOLDER)/ut_index.html
 
 # Test lint variables
-GOLANGCI_VERSION = v1.44.0
+GOLANGCI_VERSION = v1.46.2
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -42,7 +42,7 @@ unit-test-cov: unit-test
 
 test-race:
 	@go test -race $(PACKAGES)
-	
+
 fix-lint: ## Run linter to fix issues
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:$(GOLANGCI_VERSION) golangci-lint run --fix
 
