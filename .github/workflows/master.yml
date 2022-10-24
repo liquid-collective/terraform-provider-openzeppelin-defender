@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - master
-
+env:
+  GO_VERSION: 1.18
 jobs:
   unit-tests:
     name: 'Unit tests'
