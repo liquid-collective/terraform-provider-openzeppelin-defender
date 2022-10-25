@@ -61,6 +61,8 @@ jobs:
     name: 'Linting tests'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - uses: golangci/golangci-lint-action@v3
         with:
           version: v1.46.2
