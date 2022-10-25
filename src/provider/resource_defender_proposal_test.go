@@ -33,7 +33,7 @@ resource "defender_proposal" "test1" {
 		type = "address"
 	  }
 	function_inputs = ["1234","5678"]
-  }
+}
 `
 
 func testProviders(t *testing.T, client defenderclient.Client) map[string]func() (*schema.Provider, error) {
@@ -120,7 +120,6 @@ func TestAccResourceProposal(t *testing.T) {
 	client.EXPECT().ArchiveProposal(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(nil)
 
 	resource.Test(t, resource.TestCase{
-		IsUnitTest:        true,
 		ProviderFactories: testProviders(t, client),
 		Steps: []resource.TestStep{
 			{

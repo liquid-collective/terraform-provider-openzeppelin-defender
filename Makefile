@@ -35,13 +35,13 @@ build/coverage:
 	@mkdir -p build/coverage
 
 unit-test: build/coverage
-	@go test -covermode=count -coverprofile $(UNIT_COVERAGE_OUT) $(PACKAGES) -v
+	@TF_ACC=1 go test -covermode=count -coverprofile $(UNIT_COVERAGE_OUT) $(PACKAGES) -v
 
 unit-test-cov: unit-test
 	@go tool cover -html=$(UNIT_COVERAGE_OUT) -o $(UNIT_COVERAGE_HTML)
 
 test-race:
-	@go test -race $(PACKAGES)
+	@TF_ACC=1 go test -race $(PACKAGES)
 
 fix-lint: ## Run linter to fix issues
 	docker run --rm -v $(shell pwd):/app -w /app golangci/golangci-lint:$(GOLANGCI_VERSION) golangci-lint run --fix
