@@ -35,7 +35,7 @@ build/coverage:
 	@mkdir -p build/coverage
 
 unit-test: build/coverage
-	@TF_ACC=1 go test -covermode=count -coverprofile $(UNIT_COVERAGE_OUT) $(PACKAGES) -v
+	@TF_ACC=1 go test -covermode=count -coverprofile $(UNIT_COVERAGE_OUT) $(PACKAGES) -v -timeout 3s
 
 unit-test-cov: unit-test
 	@go tool cover -html=$(UNIT_COVERAGE_OUT) -o $(UNIT_COVERAGE_HTML)

@@ -116,12 +116,40 @@ func TestAccResourceProposal(t *testing.T) {
 	}
 
 	client.EXPECT().CreateProposal(gomock.Any(), testutils.JSONEq(createReqMsg)).Return(proposalRespMsg, nil)
-	client.EXPECT().GetProposalByList(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(proposalRespMsg, nil).Times(2)
+	client.EXPECT().GetProposalByList(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(proposalRespMsg, nil).AnyTimes()
 	client.EXPECT().ArchiveProposal(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(nil)
+	//	client.EXPECT().GetProposalByList(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(proposalRespMsg, nil)
 
 	resource.Test(t, resource.TestCase{
 		ProviderFactories: testProviders(t, client),
 		Steps: []resource.TestStep{
+			{
+				Config: testAccResourceCreateProposalConfig,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("defender_proposal.test1", "title", "Test Title"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "description", "Test Description"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "type", "custom"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "via", "0xc0ffee254729296a45a3885639AC7E10F9d54979"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "via_type", "Gnosis Safe"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "contract_address", "0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "contract_id", "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "contract_name", "Test Contract Name"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "contract_type", "Contract"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "created_at", "2022-10-24 23:13:00 +0000 UTC"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_inputs.#", "2"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_inputs.0", "1234"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_inputs.1", "5678"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_inputs.#", "2"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_inputs.0.name", "_testInputAlpha"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_inputs.0.type", "uint256"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_inputs.1.name", "_testInputBeta"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_inputs.1.type", "address"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_name", "testMethod"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "is_active", "true"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "is_archived", "false"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "metadata.%", "0"),
+				),
+			},
 			{
 				Config: testAccResourceCreateProposalConfig,
 				Check: resource.ComposeTestCheckFunc(

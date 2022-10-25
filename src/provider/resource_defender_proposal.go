@@ -149,7 +149,12 @@ func proposalRead(ctx context.Context, d *schema.ResourceData, meta interface{})
 	d.Set("type", proposal.Type)
 	d.Set("via", proposal.Via)
 	d.Set("via_type", proposal.ViaType)
-	d.Set("contract_id", proposal.Contract.ContractID)
+	if proposal.ContractID != "" {
+		d.Set("contract_id", proposal.ContractID)
+	} else if proposal.Contract.ContractID != "" {
+		d.Set("contract_id", proposal.Contract.ContractID)
+	}
+
 	d.Set("contract_name", proposal.Contract.Name)
 	d.Set("contract_network", proposal.Contract.Network)
 	d.Set("contract_address", proposal.Contract.Address)

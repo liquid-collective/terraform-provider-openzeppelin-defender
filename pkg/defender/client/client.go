@@ -22,7 +22,8 @@ type ProposalRespMsg struct {
 	Via     string `json:"via"`
 	ViaType string `json:"viaType"`
 
-	Contract          ContractMsg       `json:"contract"`
+	ContractID        string            `json:"contractId"`
+	Contract          ContractMsg       `json:"contract,omitempty"`
 	FunctionInterface FunctionInterface `json:"functionInterface"`
 	FunctionInputs    []interface{}     `json:"functionInputs"`
 
