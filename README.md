@@ -33,7 +33,7 @@ To use it this provider, copy and paste the following code into your Terraform c
 terraform {
   required_providers {
     defender = {
-      source = "liquidcollective.io/admin/openzeppelin-defender"
+      source = "liquid-collective/openzeppelin-defender"
     }
   }
 }
