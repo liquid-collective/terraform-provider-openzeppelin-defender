@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
 
-var ErrNotImplemented = fmt.Errorf("Not Implemented")
+var ErrNotImplemented = fmt.Errorf("not implemented")
 
 type Client struct {
 	cfg *Config
@@ -74,9 +74,8 @@ func (c *Client) authenticate(ctx context.Context) error {
 		c.authTokenCache = resp.AuthenticationResult
 
 		return nil
-	} else {
-		return fmt.Errorf("invalid authentication challenge %v", auth.ChallengeName)
 	}
+	return fmt.Errorf("invalid authentication challenge %v", auth.ChallengeName)
 }
 
 func (c *Client) createReq(ctx context.Context, method, route string, body io.Reader) (*http.Request, error) {

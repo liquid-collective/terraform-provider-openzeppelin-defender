@@ -66,31 +66,6 @@ func (c *Client) ListProposals(ctx context.Context, includeArchived bool) ([]*de
 
 func (c *Client) GetProposal(ctx context.Context, contractID, proposalID string) (*defenderclient.ProposalRespMsg, error) {
 	return nil, ErrNotImplemented
-
-	// TODO: to be implemented when route is supported by defender API
-	// req, err := c.createReq(
-	// 	ctx,
-	// 	http.MethodGet,
-	// 	fmt.Sprintf("contracts/%v/proposals/%v", contractID, proposalID),
-	// 	http.NoBody,
-	// )
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// resp, err := c.doRequest(req)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// defer resp.Body.Close()
-	// proposal := new(ProposalRespMsg)
-	// err = json.NewDecoder(resp.Body).Decode(proposal)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// return proposal, nil
 }
 
 func (c *Client) GetProposalByList(ctx context.Context, contractID, proposalID string) (*defenderclient.ProposalRespMsg, error) {
