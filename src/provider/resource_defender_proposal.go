@@ -17,6 +17,9 @@ func resourceProposal() *schema.Resource {
 		ReadContext:   proposalRead,
 		UpdateContext: proposalUpdate,
 		DeleteContext: proposalDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 		Description: `Resource is used to managed Defender Admin action proposals. 
 Any actions created this way will have no approvals initially.`,
 		Schema: map[string]*schema.Schema{
