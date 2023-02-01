@@ -119,6 +119,7 @@ Any actions created this way will have no approvals initially.`,
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "Metadata",
+				Default:     "{}",
 			},
 			"created_at": {
 				Type:        schema.TypeString,
