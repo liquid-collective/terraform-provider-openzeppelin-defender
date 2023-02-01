@@ -116,11 +116,8 @@ Any actions created this way will have no approvals initially.`,
 				Description: "Whether the proposal has been archived",
 			},
 			"metadata": {
-				Type:     schema.TypeMap,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
+				Type:        schema.TypeString,
+				Optional:    true,
 				Description: "Metadata",
 			},
 			"created_at": {
@@ -163,7 +160,8 @@ func proposalRead(ctx context.Context, d *schema.ResourceData, meta interface{})
 	d.Set("function_interface_inputs", flattenFunctionInterfaceInputs(proposal.FunctionInterface.Inputs))
 	err = d.Set("function_inputs", proposal.FunctionInputs)
 	if err != nil {
-		b, err := json.Marshal(proposal.FunctionInputs)
+		var b []byte
+		b, err = json.Marshal(proposal.FunctionInputs)
 		if err != nil {
 			return diag.FromErr(fmt.Errorf("invalid function inputs %v", err))
 		}
@@ -172,7 +170,13 @@ func proposalRead(ctx context.Context, d *schema.ResourceData, meta interface{})
 	d.Set("is_active", proposal.IsActive)
 	d.Set("is_archived", proposal.IsArchived)
 	d.Set("created_at", proposal.CreatedAt.String())
-	d.Set("metadata", proposal.Metadata)
+
+	var b []byte
+	b, err = json.Marshal(proposal.Metadata)
+	if err != nil {
+		return diag.FromErr(fmt.Errorf("invalid metadata %v", err))
+	}
+	d.Set("metadata", string(b))
 
 	return nil
 }
@@ -195,7 +199,6 @@ func proposalCreate(ctx context.Context, d *schema.ResourceData, meta interface{
 			Inputs: []defenderclient.Inputs{},
 		},
 		FunctionInputs: d.Get("function_inputs").([]interface{}),
-		Metadata:       make(map[string]string),
 	}
 
 	inputs := d.Get("function_interface_inputs").([]interface{})
@@ -223,9 +226,14 @@ func proposalCreate(ctx context.Context, d *schema.ResourceData, meta interface{
 		}
 	}
 
-	metadata := d.Get("metadata").(map[string]interface{})
-	for k, v := range metadata {
-		createProposalReq.Metadata[k] = v.(string)
+	metadataJSON := d.Get("metadata").(string)
+	if metadataJSON != "" {
+		metadata := new(defenderclient.ProposalMetadata)
+		err := json.Unmarshal([]byte(metadataJSON), &metadata)
+		if err != nil {
+			return diag.FromErr(err)
+		}
+		createProposalReq.Metadata = metadata
 	}
 
 	proposal, err := client.CreateProposal(ctx, createProposalReq)

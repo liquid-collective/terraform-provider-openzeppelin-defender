@@ -27,11 +27,12 @@ resource "defender_proposal" "test1" {
 	function_interface_inputs {
 		name = "_testInputAlpha"
 		type = "uint256"
-	  }
-	  function_interface_inputs {
+	}
+	function_interface_inputs {
 		name = "_testInputBeta"
 		type = "address"
-	  }
+	}
+	metadata = "{\"sendTo\":\"0x5B453a19845e7492ee3A0df4Ef085D4C75e5752b\",\"sendValue\":\"500000000000\",\"sendCurrency\":{\"name\":\"USD Coin\",\"symbol\":\"USDC\",\"address\":\"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\"network\":\"mainnet\",\"decimals\":6,\"type\":\"ERC20\"}}"
 	function_inputs = ["1234","5678"]
 }
 `
@@ -78,7 +79,18 @@ func TestAccResourceProposal(t *testing.T) {
 			},
 		},
 		FunctionInputs: []interface{}{"1234", "5678"},
-		Metadata:       make(map[string]string),
+		Metadata: &defenderclient.ProposalMetadata{
+			SendTo:    "0x5B453a19845e7492ee3A0df4Ef085D4C75e5752b",
+			SendValue: "500000000000",
+			SendCurrency: &defenderclient.Currency{
+				Address:  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+				Decimals: 6,
+				Name:     "USD Coin",
+				Network:  "mainnet",
+				Symbol:   "USDC",
+				Type:     "ERC20",
+			},
+		},
 	}
 
 	proposalRespMsg := &defenderclient.ProposalRespMsg{
@@ -108,7 +120,18 @@ func TestAccResourceProposal(t *testing.T) {
 				},
 			},
 		},
-		Metadata:       make(map[string]string),
+		Metadata: &defenderclient.ProposalMetadata{
+			SendTo:    "0x5B453a19845e7492ee3A0df4Ef085D4C75e5752b",
+			SendValue: "500000000000",
+			SendCurrency: &defenderclient.Currency{
+				Address:  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+				Decimals: 6,
+				Name:     "USD Coin",
+				Network:  "mainnet",
+				Symbol:   "USDC",
+				Type:     "ERC20",
+			},
+		},
 		CreatedAt:      time.Date(2022, time.October, 24, 23, 13, 0, 0, time.UTC),
 		FunctionInputs: []interface{}{"1234", "5678"},
 		IsActive:       true,
@@ -118,7 +141,6 @@ func TestAccResourceProposal(t *testing.T) {
 	client.EXPECT().CreateProposal(gomock.Any(), testutils.JSONEq(createReqMsg)).Return(proposalRespMsg, nil)
 	client.EXPECT().GetProposalByList(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(proposalRespMsg, nil).AnyTimes()
 	client.EXPECT().ArchiveProposal(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(nil)
-	//	client.EXPECT().GetProposalByList(gomock.Any(), "goerli-0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E", "test-proposal-id").Return(proposalRespMsg, nil)
 
 	resource.Test(t, resource.TestCase{
 		ProviderFactories: testProviders(t, client),
@@ -174,7 +196,7 @@ func TestAccResourceProposal(t *testing.T) {
 					resource.TestCheckResourceAttr("defender_proposal.test1", "function_interface_name", "testMethod"),
 					resource.TestCheckResourceAttr("defender_proposal.test1", "is_active", "true"),
 					resource.TestCheckResourceAttr("defender_proposal.test1", "is_archived", "false"),
-					resource.TestCheckResourceAttr("defender_proposal.test1", "metadata.%", "0"),
+					resource.TestCheckResourceAttr("defender_proposal.test1", "metadata", "{\"sendTo\":\"0x5B453a19845e7492ee3A0df4Ef085D4C75e5752b\",\"sendValue\":\"500000000000\",\"sendCurrency\":{\"name\":\"USD Coin\",\"symbol\":\"USDC\",\"address\":\"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\"network\":\"mainnet\",\"decimals\":6,\"type\":\"ERC20\"}}"),
 				),
 			},
 		},

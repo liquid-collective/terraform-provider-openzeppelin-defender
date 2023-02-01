@@ -30,9 +30,31 @@ type ProposalRespMsg struct {
 	IsActive   bool `json:"isActive"`
 	IsArchived bool `json:"isArchived"`
 
-	Metadata map[string]string `json:"metadata"`
+	Metadata *ProposalMetadata `json:"metadata,omitempty"`
 
 	CreatedAt time.Time `json:"createdAt"`
+}
+
+type ProposalMetadata struct {
+	NewImplementationAddress string    `json:"newImplementationAddress,omitempty"`
+	NewImplementationABI     string    `json:"newImplementationAbi,omitempty"`
+	ProxyAdminAddress        string    `json:"proxyAdminAddress,omitempty"`
+	Action                   string    `json:"action,omitempty"`
+	OperationType            string    `json:"operationType,omitempty"`
+	Account                  string    `json:"account,omitempty"`
+	Role                     string    `json:"role,omitempty"`
+	SendTo                   string    `json:"sendTo,omitempty"`
+	SendValue                string    `json:"sendValue,omitempty"`
+	SendCurrency             *Currency `json:"sendCurrency,omitempty"`
+}
+
+type Currency struct {
+	Name     string `json:"name,omitempty"`
+	Symbol   string `json:"symbol,omitempty"`
+	Address  string `json:"address,omitempty"`
+	Network  string `json:"network,omitempty"`
+	Decimals int    `json:"decimals,omitempty"`
+	Type     string `json:"type,omitempty"`
 }
 
 type FunctionInterface struct {
@@ -57,7 +79,7 @@ type CreateProposalReqMsg struct {
 	FunctionInterface FunctionInterface `json:"functionInterface"`
 	FunctionInputs    []interface{}     `json:"functionInputs"`
 
-	Metadata map[string]string `json:"metadata"`
+	Metadata *ProposalMetadata `json:"metadata,omitempty"`
 }
 
 type Client interface {
