@@ -64,11 +64,11 @@ func (c *Client) ListProposals(ctx context.Context, includeArchived bool) ([]*de
 	return msgs, nil
 }
 
-func (c *Client) GetProposal(ctx context.Context, contractID, proposalID string) (*defenderclient.ProposalRespMsg, error) {
+func (c *Client) GetProposal(_ context.Context, _, _ string) (*defenderclient.ProposalRespMsg, error) {
 	return nil, ErrNotImplemented
 }
 
-func (c *Client) GetProposalByList(ctx context.Context, contractID, proposalID string) (*defenderclient.ProposalRespMsg, error) {
+func (c *Client) GetProposalByList(ctx context.Context, _, proposalID string) (*defenderclient.ProposalRespMsg, error) {
 	proposals, err := c.ListProposals(ctx, true)
 	if err != nil {
 		return nil, err

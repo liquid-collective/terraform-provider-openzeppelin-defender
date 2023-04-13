@@ -39,7 +39,7 @@ resource "defender_proposal" "test1" {
 
 func testProviders(t *testing.T, client defenderclient.Client) map[string]func() (*schema.Provider, error) {
 	return map[string]func() (*schema.Provider, error){
-		"defender": func() (*schema.Provider, error) {
+		"defender": func() (*schema.Provider, error) { //nolint
 			t.Setenv("DEFENDER_API_KEY", "test-api-key")
 			t.Setenv("DEFENDER_API_SECRET", "test-api-secret")
 			provider := Provider()

@@ -24,7 +24,7 @@ type ProposalRespMsg struct {
 
 	ContractID        string            `json:"contractId"`
 	Contract          ContractMsg       `json:"contract,omitempty"`
-	FunctionInterface FunctionInterface `json:"functionInterface"`
+	FunctionInterface FunctionInterface `json:"targetFunction"`
 	FunctionInputs    []interface{}     `json:"functionInputs"`
 
 	IsActive   bool `json:"isActive"`
@@ -76,7 +76,7 @@ type CreateProposalReqMsg struct {
 	ViaType string `json:"viaType"`
 
 	Contract          ContractMsg       `json:"contract"`
-	FunctionInterface FunctionInterface `json:"functionInterface"`
+	FunctionInterface FunctionInterface `json:"targetFunction"`
 	FunctionInputs    []interface{}     `json:"functionInputs"`
 
 	Metadata *ProposalMetadata `json:"metadata,omitempty"`
