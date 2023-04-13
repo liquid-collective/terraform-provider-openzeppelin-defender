@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func newClient() (*Client, error) {
+func newClient() (*Client, error) { //nolint
 	client, err := New((&Config{
 		APIKey:    "<placeholder>",
 		APISecret: "<placeholder>",
@@ -26,7 +26,7 @@ func newClient() (*Client, error) {
 	return client, nil
 }
 
-func testCreateSendUSDCProposal(t *testing.T) {
+func testCreateSendUSDCProposal(t testing.TB) { //nolint
 	client, err := newClient()
 	require.NoError(t, err)
 

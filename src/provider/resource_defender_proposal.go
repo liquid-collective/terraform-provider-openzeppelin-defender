@@ -251,7 +251,7 @@ func proposalCreate(ctx context.Context, d *schema.ResourceData, meta interface{
 	return proposalRead(ctx, d, meta)
 }
 
-func proposalUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+func proposalUpdate(_ context.Context, _ *schema.ResourceData, _ interface{}) diag.Diagnostics {
 	return nil
 }
 
