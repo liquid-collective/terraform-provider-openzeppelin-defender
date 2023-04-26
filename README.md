@@ -18,6 +18,9 @@ OpenZeppelin Defender Terraform Provider is a plugin for managing Admin proposal
 
 ## Getting Started
 
+
+
+
 ### Requirements
 
 - [Terraform](https://www.terraform.io/downloads)
