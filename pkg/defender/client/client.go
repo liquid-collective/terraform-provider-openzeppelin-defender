@@ -75,9 +75,10 @@ type CreateProposalReqMsg struct {
 	Via     string `json:"via"`
 	ViaType string `json:"viaType"`
 
-	Contract          ContractMsg       `json:"contract"`
-	FunctionInterface FunctionInterface `json:"targetFunction"`
-	FunctionInputs    []interface{}     `json:"functionInputs"`
+	Contract          ContractMsg        `json:"contract"`
+	TargetFunction    *FunctionInterface `json:"targetFunction,omitempty"`
+	FunctionInterface *FunctionInterface `json:"functionInterface,omitempty"`
+	FunctionInputs    []interface{}      `json:"functionInputs"`
 
 	Metadata *ProposalMetadata `json:"metadata,omitempty"`
 }

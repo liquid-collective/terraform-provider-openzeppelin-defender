@@ -198,23 +198,30 @@ func proposalCreate(ctx context.Context, d *schema.ResourceData, meta interface{
 			Network: d.Get("contract_network").(string),
 			Address: d.Get("contract_address").(string),
 		},
-		FunctionInterface: defenderclient.FunctionInterface{
-			Name:   d.Get("function_interface_name").(string),
+		TargetFunction: &defenderclient.FunctionInterface{
+			Name:   "",
 			Inputs: []defenderclient.Inputs{},
 		},
 		FunctionInputs: d.Get("function_inputs").([]interface{}),
 	}
 
-	inputs := d.Get("function_interface_inputs").([]interface{})
-	for _, input := range inputs {
-		i := input.(map[string]interface{})
-		createProposalReq.FunctionInterface.Inputs = append(
-			createProposalReq.FunctionInterface.Inputs,
-			defenderclient.Inputs{
-				Name: i["name"].(string),
-				Type: i["type"].(string),
-			},
-		)
+	if functionInterfaceName := d.Get("function_interface_name").(string); functionInterfaceName != "" {
+		createProposalReq.FunctionInterface = &defenderclient.FunctionInterface{
+			Name:   d.Get("function_interface_name").(string),
+			Inputs: []defenderclient.Inputs{},
+		}
+
+		inputs := d.Get("function_interface_inputs").([]interface{})
+		for _, input := range inputs {
+			i := input.(map[string]interface{})
+			createProposalReq.FunctionInterface.Inputs = append(
+				createProposalReq.FunctionInterface.Inputs,
+				defenderclient.Inputs{
+					Name: i["name"].(string),
+					Type: i["type"].(string),
+				},
+			)
+		}
 	}
 
 	functionInputsJSON := d.Get("function_inputs_json").(string)
