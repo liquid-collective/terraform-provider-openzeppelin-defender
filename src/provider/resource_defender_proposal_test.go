@@ -65,7 +65,7 @@ func TestAccResourceProposal(t *testing.T) {
 			Network: "goerli",
 			Address: "0x999999cf1046e68e36E1aA2E0E07105eDDD1f08E",
 		},
-		FunctionInterface: defenderclient.FunctionInterface{
+		FunctionInterface: &defenderclient.FunctionInterface{
 			Name: "testMethod",
 			Inputs: []defenderclient.Inputs{
 				{
@@ -77,6 +77,10 @@ func TestAccResourceProposal(t *testing.T) {
 					Type: "address",
 				},
 			},
+		},
+		TargetFunction: &defenderclient.FunctionInterface{
+			Name:   "",
+			Inputs: []defenderclient.Inputs{},
 		},
 		FunctionInputs: []interface{}{"1234", "5678"},
 		Metadata: &defenderclient.ProposalMetadata{
